@@ -15,13 +15,14 @@ import ContactsWrapper from 'react-native-s-contact';
 import styles from 'src/assets/style/main/index';
 import TelkomselIcon from 'src/assets/image/svg/provider/telkomsel.svg';
 import ICContact from 'src/assets/image/svg/ic_contact.svg';
-import {KInput} from 'src/components/';
+import {KInput, TSwipable} from 'src/components/';
 import {TInputPulsa} from 'src/components';
 
 const topUpPulsa = ({navigation}) => {
   const [contactList, setContactList] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState(null);
+  const [isPanelActive, setIsPanelActive] = useState(false);
 
   const telkomselPhoneNumberCode = [
     '0811',
@@ -196,7 +197,10 @@ const topUpPulsa = ({navigation}) => {
   const RenderListMenu = () => {
     return listMenu.map((item) => {
       return (
-        <TouchableOpacity style={styles.pulsaMenuBoxContainer} key={item.label}>
+        <TouchableOpacity
+          style={styles.pulsaMenuBoxContainer}
+          key={item.label}
+          onPress={() => setIsPanelActive(true)}>
           <Text style={styles.pulsaMenuText}>{item.label}</Text>
           <Text style={styles.pulsaPriceText}>Rp{item.price}</Text>
         </TouchableOpacity>
@@ -218,53 +222,59 @@ const topUpPulsa = ({navigation}) => {
   };
 
   return (
-    <ScrollView style={styles.topUpKuSubContainer}>
-      <KInput
-        leftComponent={
-          <View style={styles.marginRight2}>
-            <View style={styles.flexDirectionRow}>
-              <TouchableOpacity onPress={() => openContactPhone()}>
-                <ICContact />
-              </TouchableOpacity>
-            </View>
-          </View>
-        }
-        labelTextInput=""
-        labelStyle={styles.labelTextInputStyle}
-        textInputStyleContainer={styles.TInputContainerNew}
-        textInputStyle={{...styles.textInputStyle, ...styles.lightGrayColor2}}
-        placeholder="Masukkan Nomor Telepon"
-        flexTextInput={4}
-        keyboardType="numeric"
-        value={phoneNumber}
-        onSubmitEditing={(event) =>
-          formatPhoneNumberAndChangeProvider(
-            event.nativeEvent.text[0] === '6'
-              ? event.nativeEvent.text.replace('62', '0')
-              : event.nativeEvent.text,
-          )
-        }
-        onChangeText={(number) => setPhoneNumber(number)}
-        childrenComponent={
-          <View>
-            <View style={styles.flexDirectionRow}>
-              <View>
-                {provider === 'Telkomsel' ? (
-                  <TelkomselIcon />
-                ) : (
-                  <Text>{provider}</Text>
-                )}
+    <>
+      <ScrollView style={styles.topUpKuSubContainer}>
+        <KInput
+          leftComponent={
+            <View style={styles.marginRight2}>
+              <View style={styles.flexDirectionRow}>
+                <TouchableOpacity onPress={() => openContactPhone()}>
+                  <ICContact />
+                </TouchableOpacity>
               </View>
             </View>
-          </View>
-        }
-      />
+          }
+          labelTextInput=""
+          labelStyle={styles.labelTextInputStyle}
+          textInputStyleContainer={styles.TInputContainerNew}
+          textInputStyle={{...styles.textInputStyle, ...styles.lightGrayColor2}}
+          placeholder="Masukkan Nomor Telepon"
+          flexTextInput={4}
+          keyboardType="numeric"
+          value={phoneNumber}
+          onSubmitEditing={(event) =>
+            formatPhoneNumberAndChangeProvider(
+              event.nativeEvent.text[0] === '6'
+                ? event.nativeEvent.text.replace('62', '0')
+                : event.nativeEvent.text,
+            )
+          }
+          onChangeText={(number) => setPhoneNumber(number)}
+          childrenComponent={
+            <View>
+              <View style={styles.flexDirectionRow}>
+                <View>
+                  {provider === 'Telkomsel' ? (
+                    <TelkomselIcon />
+                  ) : (
+                    <Text>{provider}</Text>
+                  )}
+                </View>
+              </View>
+            </View>
+          }
+        />
 
-      <View style={styles.pulsaButtonContainer}>
-        <RenderListMenu />
-      </View>
-      {console.log(`Contact List: ${getContact}`)}
-    </ScrollView>
+        <View style={styles.pulsaButtonContainer}>
+          <RenderListMenu />
+        </View>
+        {console.log(`Contact List: ${getContact}`)}
+      </ScrollView>
+      <TSwipable
+        isPanelActive={isPanelActive}
+        closePanel={() => setIsPanelActive(false)}
+      />
+    </>
   );
 };
 
