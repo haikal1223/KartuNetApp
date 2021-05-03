@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import ContactsWrapper from 'react-native-s-contact';
+import PropTypes from 'prop-types';
 // import ContactsWrapper from 'react-native-contacts-wrapper';
 
 // Style
@@ -17,12 +18,16 @@ import TelkomselIcon from 'src/assets/image/svg/provider/telkomsel.svg';
 import ICContact from 'src/assets/image/svg/ic_contact.svg';
 import {KInput, TSwipable} from 'src/components/';
 import {TInputPulsa} from 'src/components';
+import {priceConverter} from 'src/helpers/function';
 
-const topUpPulsa = ({navigation}) => {
+const topUpPulsa = ({navigation, route}) => {
+  console.log(navigation);
+  console.log(route.name);
   const [contactList, setContactList] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState(null);
   const [isPanelActive, setIsPanelActive] = useState(false);
+  const [selectedPrice, setSelectedPrice] = useState(0);
 
   const telkomselPhoneNumberCode = [
     '0811',
@@ -140,19 +145,19 @@ const topUpPulsa = ({navigation}) => {
   const listMenu = [
     {
       label: '15K',
-      price: '15.356',
+      price: 15356,
     },
     {
       label: '20K',
-      price: '20.700',
+      price: 20700,
     },
     {
       label: '25K',
-      price: '26.008',
+      price: 26.008,
     },
     {
       label: '30K',
-      price: '30.663',
+      price: 30663,
     },
   ];
 
@@ -194,15 +199,27 @@ const topUpPulsa = ({navigation}) => {
     }
   };
 
+  const onPressPulsaItem = (price) => {
+    setIsPanelActive(true);
+    setSelectedPrice(price);
+  };
+
+  const onCancelPulsaItem = () => {
+    setIsPanelActive(false);
+    setSelectedPrice(0);
+  };
+
   const RenderListMenu = () => {
     return listMenu.map((item) => {
       return (
         <TouchableOpacity
           style={styles.pulsaMenuBoxContainer}
           key={item.label}
-          onPress={() => setIsPanelActive(true)}>
+          onPress={() => onPressPulsaItem(item.price)}>
           <Text style={styles.pulsaMenuText}>{item.label}</Text>
-          <Text style={styles.pulsaPriceText}>Rp{item.price}</Text>
+          <Text style={styles.pulsaPriceText}>
+            Rp{priceConverter(item.price)}
+          </Text>
         </TouchableOpacity>
       );
     });
@@ -272,10 +289,18 @@ const topUpPulsa = ({navigation}) => {
       </ScrollView>
       <TSwipable
         isPanelActive={isPanelActive}
-        closePanel={() => setIsPanelActive(false)}
+        closePanel={onCancelPulsaItem}
+        provider={provider}
+        data={{selectedPrice}}
+        screenName={route.name}
       />
     </>
   );
+};
+
+topUpPulsa.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default topUpPulsa;

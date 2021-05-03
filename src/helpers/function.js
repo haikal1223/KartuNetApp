@@ -10,3 +10,7 @@ export const formatSelectBox = (data) => {
     };
   });
 };
+
+export const priceConverter = (price) => {
+  return price.toLocaleString('de-DE');
+};
