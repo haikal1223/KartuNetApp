@@ -32,7 +32,7 @@ import MarketplaceIcon from 'src/assets/image/svg/icon/home/marketplacePurpleIco
 
 // disabled icon
 import TokokuDisabledIcon from 'src/assets/image/svg/icon/home/tokokuDisabledIcon.svg';
-import TopUpDisabledIcon from 'src/assets/image/svg/icon/home/topupPurpleIconDisabled.svg';
+// import TopUpDisabledIcon from 'src/assets/image/svg/icon/home/topupPurpleIconDisabled.svg';
 import MarketplaceDisabledIcon from 'src/assets/image/svg/icon/home/marketplaceDisabledIcon.svg';
 
 const homeScreen = ({route, navigation}) => {
@@ -79,13 +79,14 @@ const homeScreen = ({route, navigation}) => {
       disabled: false,
     },
     {
-      image: TopUpDisabledIcon,
+      image: TopUpIcon,
       title: 'TopUpKu',
-      // onPress: () => {{
-      //   navigation.navigate('TopUpKu');
-      // }},
-      onPress: () => {},
-      disabled: true,
+      onPress: () => {
+        {
+          navigation.navigate('TopUpKu');
+        }
+      },
+      disabled: false,
     },
     {
       image: TokokuDisabledIcon,

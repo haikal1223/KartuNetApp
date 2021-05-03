@@ -82,7 +82,8 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpKuScreen}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            // ...styles.headerMain,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -92,10 +93,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
