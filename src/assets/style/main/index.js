@@ -1423,6 +1423,54 @@ const topUpKuStyles = {
   },
 };
 
+const TSwipeableStyle = {
+  descContainer: {
+    flexDirection: 'row',
+    marginVertical: 5,
+  },
+  dividerStyle: {
+    marginVertical: 5,
+    paddingVertical: 10,
+  },
+  mainContainer: {
+    // backgroundColor: 'orange',
+    flex: 1,
+    height: Dimensions.get('window').height - 125,
+  },
+  mainHeaderContainer: {
+    marginVertical: 10,
+  },
+  marginHorizontal: {
+    marginHorizontal: 10,
+  },
+  providerText: {
+    marginRight: 12.5,
+  },
+  purchaseButtonContainer: {
+    bottom: 0,
+    position: 'absolute',
+    width: '100%',
+  },
+  secondaryHeaderContainer: {
+    marginHorizontal: 10,
+    marginVertical: 7.5,
+  },
+  spaceBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  subHeaderText2: {
+    fontFamily: MonserratBold,
+    fontSize: width * 0.035,
+  },
+  textBold: {
+    fontWeight: '700',
+  },
+  whiteColor: {
+    color: whiteColor,
+  },
+};
+
 const styles = StyleSheet.create({
   // Dummy slider style]
 
@@ -1571,6 +1619,9 @@ const styles = StyleSheet.create({
 
   // TopUpku Screen Styles
   ...topUpKuStyles,
+
+  // TSwipeable Screen Styles
+  ...TSwipeableStyle,
 });
 
 export default styles;

@@ -45,7 +45,7 @@ import IconMenuBurgerBlack from 'src/assets/image/svg/menu_burger_black.svg';
 
 const Stack = createStackNavigator();
 
-const HomeStackNavigator = ({navigation}) => {
+const HomeStackNavigator = ({navigation, route}) => {
   return (
     <Stack.Navigator
       screenOptions={{cardStyle: {backgroundColor: '#fff'}}}
@@ -127,7 +127,7 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpPaketData}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -137,10 +137,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
@@ -149,20 +149,20 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpListrik}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
           },
           headerTitleAlign: 'center',
-          title: 'Listrik',
+          title: 'PLN',
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 

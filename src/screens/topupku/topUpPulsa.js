@@ -199,12 +199,12 @@ const topUpPulsa = ({navigation, route}) => {
     }
   };
 
-  const onPressPulsaItem = (price) => {
+  const onPressPriceItem = (price) => {
     setIsPanelActive(true);
     setSelectedPrice(price);
   };
 
-  const onCancelPulsaItem = () => {
+  const onCancelPriceItem = () => {
     setIsPanelActive(false);
     setSelectedPrice(0);
   };
@@ -215,7 +215,7 @@ const topUpPulsa = ({navigation, route}) => {
         <TouchableOpacity
           style={styles.pulsaMenuBoxContainer}
           key={item.label}
-          onPress={() => onPressPulsaItem(item.price)}>
+          onPress={() => onPressPriceItem(item.price)}>
           <Text style={styles.pulsaMenuText}>{item.label}</Text>
           <Text style={styles.pulsaPriceText}>
             Rp{priceConverter(item.price)}
@@ -289,7 +289,7 @@ const topUpPulsa = ({navigation, route}) => {
       </ScrollView>
       <TSwipable
         isPanelActive={isPanelActive}
-        closePanel={onCancelPulsaItem}
+        closePanel={onCancelPriceItem}
         provider={provider}
         data={{selectedPrice}}
         screenName={route.name}
