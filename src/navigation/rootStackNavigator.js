@@ -168,6 +168,7 @@ const BottomTabNavigator = () => {
       'Indihome',
       'Cicilan',
       'AirPam',
+      'ListrikOptions',
     ];
     if (topUpKuScreen.includes(routeName)) {
       return false;

@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {
   FlatList,
-  ScrollView,
-  StyleSheet,
+  // ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -12,7 +11,6 @@ import {KInput, TSwipable} from 'src/components';
 import ICContact from 'src/assets/image/svg/ic_contact.svg';
 import TelkomselIcon from 'src/assets/image/svg/provider/telkomsel.svg';
 import {priceConverter} from 'src/helpers/function';
-import {MonserratBold} from 'src/assets/style/main/fontFamily';
 import {Divider} from 'react-native-elements';
 import PropTypes from 'prop-types';
 
@@ -99,16 +97,16 @@ const topUpPaketData = ({route}) => {
           ItemSeparatorComponent={() => <Divider />}
           renderItem={({item}) => (
             <TouchableOpacity onPress={() => onPressDataItem(item)}>
-              <View style={gaya.itemContainer}>
-                <View style={gaya.icon} />
+              <View style={styles.itemContainer}>
+                <View style={styles.icon} />
                 <View>
                   <View>
-                    <Text style={gaya.packageName}>{item.name}</Text>
+                    <Text style={styles.packageName}>{item.name}</Text>
                   </View>
-                  <View style={gaya.descContainer}>
+                  <View style={styles.descContainer}>
                     <Text>{item.desc}</Text>
                   </View>
-                  <View style={gaya.priceContainer}>
+                  <View style={styles.priceContainer}>
                     <Text>Rp.{priceConverter(item.price)}</Text>
                     <Text> • </Text>
                     <Text>Active for {item.activeFor} days</Text>
@@ -129,36 +127,6 @@ const topUpPaketData = ({route}) => {
     </>
   );
 };
-
-const gaya = StyleSheet.create({
-  descContainer: {
-    // flexWrap: 'wrap',
-    marginVertical: 2,
-    width: '100%',
-  },
-  packageName: {
-    // fontWeight: 'bold',
-    marginBottom: 5,
-    fontFamily: MonserratBold,
-    fontSize: 16,
-  },
-  icon: {
-    backgroundColor: '#eeeeee',
-    borderRadius: 10,
-    height: 45,
-    width: 45,
-    marginRight: 15,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    marginVertical: 10,
-    // alignItems: 'center',
-    marginHorizontal: 20,
-  },
-  priceContainer: {
-    flexDirection: 'row',
-  },
-});
 
 topUpPaketData.propTypes = {
   navigation: PropTypes.object,

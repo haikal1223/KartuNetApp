@@ -606,6 +606,9 @@ const textInputStyle = {
   containerStyle: {
     marginBottom: height * 0.04,
   },
+  marginHorizontalContainer: {
+    marginHorizontal: 10,
+  },
   labelTextInputStyle: {
     fontFamily: MonserratBold,
     color: blackColor,
@@ -1465,9 +1468,40 @@ const TSwipeableStyle = {
   },
   textBold: {
     fontWeight: '700',
+    fontFamily: MonserratBold,
   },
   whiteColor: {
     color: whiteColor,
+  },
+};
+
+const topUpPaketDataStyles = {
+  descContainer: {
+    // flexWrap: 'wrap',
+    marginVertical: 2,
+    width: '100%',
+  },
+  icon: {
+    backgroundColor: '#eeeeee',
+    borderRadius: 10,
+    height: 45,
+    marginRight: 15,
+    width: 45,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    marginVertical: 10,
+    // alignItems: 'center',
+  },
+  packageName: {
+    // fontWeight: 'bold',
+    fontFamily: MonserratBold,
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  priceContainer: {
+    flexDirection: 'row',
   },
 };
 
@@ -1622,6 +1656,9 @@ const styles = StyleSheet.create({
 
   // TSwipeable Screen Styles
   ...TSwipeableStyle,
+
+  // TopUpPaketData Screen Styles
+  ...topUpPaketDataStyles,
 });
 
 export default styles;

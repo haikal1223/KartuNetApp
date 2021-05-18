@@ -42,6 +42,7 @@ import BackArrow from 'src/assets/image/svg/back-arrow.svg';
 import BackArrowWhite from 'src/assets/image/svg/back-arrow-white-new.svg';
 import IconMenuBurger from 'src/assets/image/svg/menu_burger.svg';
 import IconMenuBurgerBlack from 'src/assets/image/svg/menu_burger_black.svg';
+import topUpListrikOptions from 'src/screens/topupku/topUpListrikOptions';
 
 const Stack = createStackNavigator();
 
@@ -147,6 +148,27 @@ const HomeStackNavigator = ({navigation, route}) => {
       <Stack.Screen
         name="Listrik"
         component={topUpListrik}
+        options={{
+          headerStyle: {
+            ...styles.headerMain,
+          },
+          headerLeftContainerStyle: {
+            ...styles.headerLeftStyle,
+          },
+          headerTitleAlign: 'center',
+          title: 'PLN',
+          // headerTintColor: '#FFFFFF',
+          headerTitleStyle: {
+            ...styles.headerCenterStyle,
+            ...styles.blackColor,
+          },
+          // eslint-disable-next-line react/display-name
+          headerBackImage: () => <BackArrow />,
+        }}
+      />
+      <Stack.Screen
+        name="ListrikOptions"
+        component={topUpListrikOptions}
         options={{
           headerStyle: {
             ...styles.headerMain,

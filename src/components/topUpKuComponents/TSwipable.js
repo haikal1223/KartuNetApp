@@ -8,8 +8,11 @@ import {} from 'src/assets/style/main';
 import LinearGradient from 'react-native-linear-gradient';
 import {KButton} from '..';
 import styles from 'src/assets/style/main';
+import {useSelector} from 'react-redux';
 
 const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
+  const custName = useSelector((state) => state.auth.name);
+
   const [panelProps] = useState({
     fullWidth: true,
     openLarge: true,
@@ -137,9 +140,63 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
         </React.Fragment>
       );
     },
+    ListrikOptions: () => {
+      return (
+        <React.Fragment>
+          <View style={styles.mainContainer}>
+            <View style={styles.marginHorizontal}>
+              <View style={styles.mainHeaderContainer}>
+                <Text style={styles.textBold}>Ringkasan Pembelian</Text>
+              </View>
+              <View>
+                <Text>No Meter</Text>
+                <Text>{data.customerID}</Text>
+                <Text>Nama</Text>
+                <Text>{custName}</Text>
+                <Text>Tarif/Daya</Text>
+                <Text>R1/2200VA</Text>
+              </View>
+            </View>
+            <View style={styles.marginHorizontal}>
+              <View style={styles.mainHeaderContainer}>
+                <Text style={styles.textBold}>Ringkasan Pembayaran</Text>
+              </View>
+              <View>
+                <View>
+                  <Text>Nominal</Text>
+                  <Text>Rp.{priceConverter(data.dataPackage)}</Text>
+                  <Text>Admin Bank</Text>
+                  <Text>Rp.1500</Text>
+                  {/* <Text>Rp{priceConverter(data.selectedPrice)}</Text> */}
+                </View>
+              </View>
+              <Divider />
+              <View style={styles.mainHeaderContainer}>
+                <View style={styles.spaceBetween}>
+                  <Text style={styles.textBold}>Total</Text>
+                  <Text>Rp{priceConverter(data.dataPackage + 1500)}</Text>
+                </View>
+              </View>
+              {/* <Text>{screenName}</Text> */}
+            </View>
+            <View style={styles.purchaseButtonContainer}>
+              <KButton
+                title="Bayar"
+                buttonStyle={styles.greenBottomButton}
+                textStyle={{
+                  ...styles.whiteColor,
+                  ...styles.subHeaderText2,
+                }}
+              />
+            </View>
+          </View>
+        </React.Fragment>
+      );
+    },
   };
   screens.Pulsa.displayName = 'Pulsa';
   screens.PaketData.displayName = 'PaketData';
+  screens.ListrikOptions.displayName = 'ListrikOptions';
   console.log(screenName);
   return (
     <SwipeablePanel {...panelProps} isActive={isPanelActive}>
