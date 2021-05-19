@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   FlatList,
+  PermissionsAndroid,
+  Platform,
   // ScrollView,
   Text,
   TouchableOpacity,
@@ -10,15 +13,25 @@ import styles from 'src/assets/style/main';
 import {KInput, TSwipable} from 'src/components';
 import ICContact from 'src/assets/image/svg/ic_contact.svg';
 import TelkomselIcon from 'src/assets/image/svg/provider/telkomsel.svg';
-import {priceConverter} from 'src/helpers/function';
+import {
+  formatPhoneNumberAndChangeProvider,
+  // openContactPhone,
+  priceConverter,
+} from 'src/helpers/function';
 import {Divider} from 'react-native-elements';
 import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
+
+import ContactsWrapper from 'react-native-s-contact';
 
 const topUpPaketData = ({route}) => {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState(null);
   const [isPanelActive, setIsPanelActive] = useState(false);
   const [dataPackage, setDataPackage] = useState({});
+
+  const user = useSelector((state) => state.auth.user);
+  const {phone} = user;
 
   const sampleData = [
     {
@@ -37,6 +50,27 @@ const topUpPaketData = ({route}) => {
     },
   ];
 
+  const setDefaultPhoneNumber = async () => {
+    try {
+      setPhoneNumber(
+        formatPhoneNumberAndChangeProvider(
+          phone[0] === '6' ? phone.replace('62', '0') : phone,
+        ).formattedPhoneNumber,
+      );
+      setProvider(
+        formatPhoneNumberAndChangeProvider(
+          phone[0] === '6' ? phone.replace('62', '0') : phone,
+        ).providerPhoneNumber,
+      );
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    setDefaultPhoneNumber();
+  }, []);
+
   const onPressDataItem = (price) => {
     setIsPanelActive(true);
     setDataPackage(price);
@@ -47,6 +81,57 @@ const topUpPaketData = ({route}) => {
     setDataPackage({});
   };
 
+  const openContactPhone = () => {
+    if (Platform.OS === 'android') {
+      PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+        title: 'Contacts',
+        message: 'This app would like to view your contacts.',
+      }).then(() => {
+        ContactsWrapper.getContact()
+          .then((contact) => {
+            const {name, phone} = contact;
+            let phoneNumber = phone.replace(/\D/g, '');
+            phoneNumber =
+              phoneNumber[0] === '6'
+                ? phoneNumber.replace('62', '0')
+                : phoneNumber;
+            setPhoneNumber(
+              formatPhoneNumberAndChangeProvider(phoneNumber)
+                .formattedPhoneNumber,
+            );
+            setProvider(
+              formatPhoneNumberAndChangeProvider(phoneNumber)
+                .providerPhoneNumber,
+            );
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      });
+    } else {
+      // for ios
+      ContactsWrapper.getContact()
+        .then((contact) => {
+          const {name, phone} = contact;
+          let phoneNumber = phone.replace(/\D/g, '');
+          phoneNumber =
+            phoneNumber[0] === '6'
+              ? phoneNumber.replace('62', '0')
+              : phoneNumber;
+          setPhoneNumber(
+            formatPhoneNumberAndChangeProvider(phoneNumber)
+              .formattedPhoneNumber,
+          );
+          setProvider(
+            formatPhoneNumberAndChangeProvider(phoneNumber).providerPhoneNumber,
+          );
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
+
   return (
     <>
       <View>
@@ -54,9 +139,7 @@ const topUpPaketData = ({route}) => {
           leftComponent={
             <View style={styles.marginRight2}>
               <View style={styles.flexDirectionRow}>
-                <TouchableOpacity
-                // onPress={() => openContactPhone()}
-                >
+                <TouchableOpacity onPress={() => openContactPhone()}>
                   <ICContact />
                 </TouchableOpacity>
               </View>
@@ -96,7 +179,12 @@ const topUpPaketData = ({route}) => {
           data={sampleData}
           ItemSeparatorComponent={() => <Divider />}
           renderItem={({item}) => (
-            <TouchableOpacity onPress={() => onPressDataItem(item)}>
+            <TouchableOpacity
+              onPress={() =>
+                provider && phoneNumber
+                  ? onPressDataItem(item)
+                  : Alert.alert('Invalid Number')
+              }>
               <View style={styles.itemContainer}>
                 <View style={styles.icon} />
                 <View>

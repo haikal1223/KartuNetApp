@@ -1,5 +1,5 @@
 import {PermissionsAndroid, Platform} from 'react-native';
-import ContactsWrapper from 'react-native-s-contact';
+import ContactsWrapper, {Contacts} from 'react-native-s-contact';
 
 export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -122,38 +122,51 @@ export const formatPhoneNumberAndChangeProvider = (phoneNumber) => {
   // setProvider(providerPhoneNumber);
 };
 
-export const openContactPhone = () => {
-  if (Platform.OS === 'android') {
-    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
-      title: 'Contacts',
-      message: 'This app would like to view your contacts.',
-    }).then(() => {
-      ContactsWrapper.getContact()
-        .then((contact) => {
-          const {name, phone} = contact;
-          let phoneNumber = phone.replace(/\D/g, '');
-          phoneNumber =
-            phoneNumber[0] === '6'
-              ? phoneNumber.replace('62', '0')
-              : phoneNumber;
-          formatPhoneNumberAndChangeProvider(phoneNumber);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    });
-  } else {
-    // for ios
-    ContactsWrapper.getContact()
-      .then((contact) => {
-        const {name, phone} = contact;
-        let phoneNumber = phone.replace(/\D/g, '');
-        phoneNumber =
-          phoneNumber[0] === '6' ? phoneNumber.replace('62', '0') : phoneNumber;
-        formatPhoneNumberAndChangeProvider(phoneNumber);
-      })
-      .catch((e) => {
-        console.log(e);
+// export const openContactPhone = () => {
+//   if (Platform.OS === 'android') {
+//     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+//       title: 'Contacts',
+//       message: 'This app would like to view your contacts.',
+//     }).then(() => {
+//       ContactsWrapper.getContact()
+//         .then((contact) => {
+//           const {name, phone} = contact;
+//           let phoneNumber = phone.replace(/\D/g, '');
+//           phoneNumber =
+//             phoneNumber[0] === '6'
+//               ? phoneNumber.replace('62', '0')
+//               : phoneNumber;
+//           formatPhoneNumberAndChangeProvider(phoneNumber);
+//         })
+//         .catch((e) => {
+//           console.log(e);
+//         });
+//     });
+//   } else {
+//     // for ios
+//     ContactsWrapper.getContact()
+//       .then((contact) => {
+//         const {name, phone} = contact;
+//         let phoneNumber = phone.replace(/\D/g, '');
+//         phoneNumber =
+//           phoneNumber[0] === '6' ? phoneNumber.replace('62', '0') : phoneNumber;
+//         formatPhoneNumberAndChangeProvider(phoneNumber);
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//       });
+//   }
+// };
+
+export const getContact = () => {
+  Contacts.checkPermission((error, res) => {
+    if (res === 'authorized') {
+      Contacts.getAll((err, contact) => {
+        {
+          console.log(contact);
+        }
+        return contact;
       });
-  }
+    }
+  });
 };

@@ -20,6 +20,7 @@ import {KInput, TSwipable} from 'src/components/';
 import {TInputPulsa} from 'src/components';
 import {
   formatPhoneNumberAndChangeProvider,
+  // openContactPhone,
   priceConverter,
 } from 'src/helpers/function';
 // import {
@@ -162,18 +163,18 @@ const topUpPulsa = ({navigation, route}) => {
     });
   };
 
-  const getContact = () => {
-    Contacts.checkPermission((error, res) => {
-      if (res === 'authorized') {
-        Contacts.getAll((err, contact) => {
-          {
-            console.log(contact);
-          }
-          setContactList(contact);
-        });
-      }
-    });
-  };
+  // const getContact = () => {
+  //   Contacts.checkPermission((error, res) => {
+  //     if (res === 'authorized') {
+  //       Contacts.getAll((err, contact) => {
+  //         {
+  //           console.log(contact);
+  //         }
+  //         setContactList(contact);
+  //       });
+  //     }
+  //   });
+  // };
 
   return (
     <>
@@ -231,7 +232,7 @@ const topUpPulsa = ({navigation, route}) => {
         <View style={styles.pulsaButtonContainer}>
           <RenderListMenu />
         </View>
-        {console.log(`Contact List: ${getContact}`)}
+        {/* {console.log(`Contact List: ${getContact}`)} */}
       </ScrollView>
       <TSwipable
         isPanelActive={isPanelActive}

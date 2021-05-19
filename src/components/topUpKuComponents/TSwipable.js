@@ -107,11 +107,18 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
                   Ringkasan Pembelian
                 </Text>
               </View>
-              <View style={styles.descContainer}>
-                <View>
-                  <Text style={styles.providerText}>{provider}</Text>
+              <View
+                style={{...styles.descContainer, ...styles.flexDirectionRow}}>
+                <View style>
+                  {provider === 'Telkomsel' ? (
+                    <View style={styles.marginRight5}>
+                      <TelkomselIcon />
+                    </View>
+                  ) : (
+                    <Text style={styles.providerText}>{provider}</Text>
+                  )}
                 </View>
-                <View>
+                <View style={{...styles.width80perc}}>
                   <Text style={styles.fontMonserratBold}>{data.name}</Text>
                   <Text
                     style={{
