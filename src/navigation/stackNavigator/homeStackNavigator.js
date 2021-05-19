@@ -40,13 +40,13 @@ import promoScreen from 'src/screens/promo';
 import styles from 'src/assets/style/main';
 import BackArrow from 'src/assets/image/svg/back-arrow.svg';
 import BackArrowWhite from 'src/assets/image/svg/back-arrow-white-new.svg';
-import IconMenuBurger from 'src/assets/image/svg/menu_burger.svg';
+// import IconMenuBurger from 'src/assets/image/svg/menu_burger.svg';
 import IconMenuBurgerBlack from 'src/assets/image/svg/menu_burger_black.svg';
 import topUpListrikOptions from 'src/screens/topupku/topUpListrikOptions';
 
 const Stack = createStackNavigator();
 
-const HomeStackNavigator = ({navigation, route}) => {
+const HomeStackNavigator = ({navigation}) => {
   return (
     <Stack.Navigator
       screenOptions={{cardStyle: {backgroundColor: '#fff'}}}
@@ -215,7 +215,7 @@ const HomeStackNavigator = ({navigation, route}) => {
         component={topUpIndihome}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -225,10 +225,10 @@ const HomeStackNavigator = ({navigation, route}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 

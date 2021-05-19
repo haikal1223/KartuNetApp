@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {Dimensions, FlatList, StyleSheet, Text, View} from 'react-native';
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {KButton, KInput, TSwipable} from 'src/components';
 import styles from 'src/assets/style/main';
 import {priceConverter} from 'src/helpers/function';
@@ -20,7 +27,7 @@ const topUpListrikOptions = ({route}) => {
 
   const [isPanelActive, setIsPanelActive] = useState(false);
   const [dataPackage, setDataPackage] = useState({});
-  console.log(selectedOption);
+  // console.log(selectedOption);
 
   const onPressDataItem = (data) => {
     setIsPanelActive(true);
@@ -31,7 +38,7 @@ const topUpListrikOptions = ({route}) => {
     setIsPanelActive(false);
     setDataPackage({});
   };
-  console.log(route.name);
+  console.log(route.params.name);
   return (
     <>
       <View style={styles.mainContainer}>
@@ -81,7 +88,13 @@ const topUpListrikOptions = ({route}) => {
               ...styles.whiteColor,
               ...styles.subHeaderText2,
             }}
-            onPress={() => onPressDataItem(selectedOption)}
+            onPress={() =>
+              selectedOption && customerID
+                ? onPressDataItem(selectedOption)
+                : Alert.alert(
+                    'Please Fill in your Customer ID and Select a Package',
+                  )
+            }
           />
         </View>
       </View>

@@ -30,7 +30,9 @@ const topUpListrik = ({navigation}) => {
         data={listItem}
         renderItem={({item}) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('ListrikOptions')}>
+            onPress={() =>
+              navigation.navigate('ListrikOptions', {name: item.name})
+            }>
             <TCardMenu key={item.name} image={item.image} name={item.name} />
           </TouchableOpacity>
         )}

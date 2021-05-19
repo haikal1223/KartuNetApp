@@ -9,6 +9,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {KButton} from '..';
 import styles from 'src/assets/style/main';
 import {useSelector} from 'react-redux';
+import TelkomselIcon from 'src/assets/image/svg/provider/telkomsel.svg';
 
 const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
   const custName = useSelector((state) => state.auth.name);
@@ -29,12 +30,24 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
           <View style={styles.mainContainer}>
             <View style={styles.marginHorizontal}>
               <View style={styles.mainHeaderContainer}>
-                <Text style={styles.textBold}>Ringkasan Pembelian</Text>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembelian
+                </Text>
               </View>
               <View>
-                <View style={styles.descContainer}>
-                  <Text style={styles.providerText}>{provider}</Text>
-                  <Text style={styles.textBold}>
+                <View style={styles.flexDirectionRow}>
+                  {provider === 'Telkomsel' ? (
+                    <View style={{...styles.marginRight2}}>
+                      <TelkomselIcon />
+                    </View>
+                  ) : (
+                    <View style={{...styles.marginRight2}}>
+                      <Text style={styles.fontMonserratRegular}>
+                        {provider}
+                      </Text>
+                    </View>
+                  )}
+                  <Text style={styles.fontMonserratBold}>
                     Pulsa {priceConverter(data.selectedPrice)}
                   </Text>
                 </View>
@@ -46,19 +59,23 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
             />
             <View>
               <View style={styles.secondaryHeaderContainer}>
-                <Text style={styles.textBold}>Ringkasan Pembayaran</Text>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembayaran
+                </Text>
               </View>
               <View style={styles.secondaryHeaderContainer}>
                 <View style={styles.spaceBetween}>
-                  <Text>Jumlah</Text>
-                  <Text>Rp{priceConverter(data.selectedPrice)}</Text>
+                  <Text style={styles.fontMonserratRegular}>Jumlah</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    Rp{priceConverter(data.selectedPrice)}
+                  </Text>
                 </View>
               </View>
               <Divider />
               <View style={styles.secondaryHeaderContainer}>
                 <View style={styles.spaceBetween}>
-                  <Text style={styles.textBold}>Total</Text>
-                  <Text style={styles.textBold}>
+                  <Text style={styles.fontMonserratBold}>Total</Text>
+                  <Text style={styles.fontMonserratBold}>
                     Rp{priceConverter(data.selectedPrice)}
                   </Text>
                 </View>
@@ -86,18 +103,27 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
           <View style={styles.mainContainer}>
             <View style={styles.marginHorizontal}>
               <View style={styles.mainHeaderContainer}>
-                <Text style={styles.textBold}>Ringkasan Pembelian</Text>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembelian
+                </Text>
               </View>
               <View style={styles.descContainer}>
                 <View>
                   <Text style={styles.providerText}>{provider}</Text>
                 </View>
                 <View>
-                  <Text style={styles.textBold}>{data.name}</Text>
-                  <Text style={{...styles.marginBottom1, ...styles.marginTop1}}>
+                  <Text style={styles.fontMonserratBold}>{data.name}</Text>
+                  <Text
+                    style={{
+                      ...styles.marginBottom1,
+                      ...styles.marginTop1,
+                      ...styles.fontMonserratRegular,
+                    }}>
                     {data.desc}
                   </Text>
-                  <Text>Active for {data.activeFor} days</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    Active for {data.activeFor} days
+                  </Text>
                 </View>
               </View>
             </View>
@@ -107,19 +133,23 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
             />
             <View>
               <View style={styles.secondaryHeaderContainer}>
-                <Text style={styles.textBold}>Ringkasan Pembayaran</Text>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembayaran
+                </Text>
               </View>
               <View style={styles.secondaryHeaderContainer}>
                 <View style={styles.spaceBetween}>
-                  <Text>Jumlah</Text>
-                  <Text>Rp{priceConverter(data.price)}</Text>
+                  <Text style={styles.fontMonserratRegular}>Jumlah</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    Rp{priceConverter(data.price)}
+                  </Text>
                 </View>
               </View>
               <Divider />
               <View style={styles.secondaryHeaderContainer}>
                 <View style={styles.spaceBetween}>
-                  <Text style={styles.textBold}>Total</Text>
-                  <Text style={styles.textBold}>
+                  <Text style={styles.fontMonserratBold}>Total</Text>
+                  <Text style={styles.fontMonserratBold}>
                     Rp{priceConverter(data.price)}
                   </Text>
                 </View>
@@ -146,15 +176,25 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
           <View style={styles.mainContainer}>
             <View style={styles.marginHorizontal}>
               <View style={styles.mainHeaderContainer}>
-                <Text style={styles.textBold}>Ringkasan Pembelian</Text>
+                <Text style={{...styles.textBold, ...styles.fontMonserratBold}}>
+                  Ringkasan Pembelian
+                </Text>
               </View>
               <View>
-                <Text>No Meter</Text>
-                <Text>{data.customerID}</Text>
-                <Text>Nama</Text>
-                <Text>{custName}</Text>
-                <Text>Tarif/Daya</Text>
-                <Text>R1/2200VA</Text>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>No Meter</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    {data.customerID}
+                  </Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Nama</Text>
+                  <Text style={styles.fontMonserratRegular}>{custName}</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Tarif/Daya</Text>
+                  <Text style={styles.fontMonserratRegular}>R1/2200VA</Text>
+                </View>
               </View>
             </View>
             <View style={styles.marginHorizontal}>
@@ -162,18 +202,22 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
                 <Text style={styles.textBold}>Ringkasan Pembayaran</Text>
               </View>
               <View>
-                <View>
-                  <Text>Nominal</Text>
-                  <Text>Rp.{priceConverter(data.dataPackage)}</Text>
-                  <Text>Admin Bank</Text>
-                  <Text>Rp.1500</Text>
-                  {/* <Text>Rp{priceConverter(data.selectedPrice)}</Text> */}
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Nominal</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    Rp.{priceConverter(data.dataPackage)}
+                  </Text>
                 </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Admin Bank</Text>
+                  <Text style={styles.fontMonserratRegular}>Rp.1500</Text>
+                </View>
+                {/* <Text>Rp{priceConverter(data.selectedPrice)}</Text> */}
               </View>
-              <Divider />
+              <Divider style={styles.itemSpacing} />
               <View style={styles.mainHeaderContainer}>
-                <View style={styles.spaceBetween}>
-                  <Text style={styles.textBold}>Total</Text>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.textBold}>Total Pembayaran</Text>
                   <Text>Rp{priceConverter(data.dataPackage + 1500)}</Text>
                 </View>
               </View>

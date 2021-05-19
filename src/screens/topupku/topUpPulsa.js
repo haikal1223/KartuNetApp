@@ -18,7 +18,18 @@ import TelkomselIcon from 'src/assets/image/svg/provider/telkomsel.svg';
 import ICContact from 'src/assets/image/svg/ic_contact.svg';
 import {KInput, TSwipable} from 'src/components/';
 import {TInputPulsa} from 'src/components';
-import {priceConverter} from 'src/helpers/function';
+import {
+  formatPhoneNumberAndChangeProvider,
+  priceConverter,
+} from 'src/helpers/function';
+// import {
+//   telkomselPhoneNumberCode,
+//   smartfrenPhoneNumberCode,
+//   indosatPhoneNumberCode,
+//   xlPhoneNumberCode,
+//   axisPhoneNumberCode,
+//   threePhoneNumberCode,
+// } from 'src/helpers/function';
 
 const topUpPulsa = ({navigation, route}) => {
   console.log(navigation);
@@ -29,107 +40,20 @@ const topUpPulsa = ({navigation, route}) => {
   const [isPanelActive, setIsPanelActive] = useState(false);
   const [selectedPrice, setSelectedPrice] = useState(0);
 
-  const telkomselPhoneNumberCode = [
-    '0811',
-    '0812',
-    '0813',
-    '0821',
-    '0822',
-    '0852',
-    '0853',
-    '0823',
-    '0851',
-  ];
-
-  const indosatPhoneNumberCode = [
-    '0814',
-    '0815',
-    '0816',
-    '0855',
-    '0856',
-    '0857',
-    '0858',
-  ];
-
-  const xlPhoneNumberCode = ['0817', '0818', '0819', '0859', '0877', '0878'];
-
-  const axisPhoneNumberCode = ['0838', '0831', '0832', '0833'];
-
-  const threePhoneNumberCode = ['0895', '0896', '0897', '0898', '0899'];
-
-  const smartfrenPhoneNumberCode = [
-    '0881',
-    '0882',
-    '0883',
-    '0884',
-    '0885',
-    '0886',
-    '0887',
-    '0888',
-    '0889',
-  ];
-
   const user = useSelector((state) => state.auth.user);
   const {phone} = user;
 
-  const formatPhoneNumberAndChangeProvider = (phoneNumber) => {
-    const formattedPhoneNumber =
-      phoneNumber[0] === '6' ? phoneNumber.replace('62', '0') : phoneNumber;
-    let providerPhoneNumber = '';
-    const telkomselFindIndex = telkomselPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const indosatFindIndex = indosatPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const xlFindIndex = xlPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const axisFindIndex = axisPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const threeFindIndex = threePhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const smartfrenFindIndex = smartfrenPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    if (telkomselFindIndex !== -1) {
-      providerPhoneNumber = 'Telkomsel';
-    }
-
-    if (indosatFindIndex !== -1) {
-      providerPhoneNumber = 'Indosat';
-    }
-
-    if (xlFindIndex !== -1) {
-      providerPhoneNumber = 'XL';
-    }
-
-    if (axisFindIndex !== -1) {
-      providerPhoneNumber = 'Axis';
-    }
-    if (threeFindIndex !== -1) {
-      providerPhoneNumber = 'Three';
-    }
-    if (smartfrenFindIndex !== -1) {
-      providerPhoneNumber = 'Smartfren';
-    }
-
-    setPhoneNumber(formattedPhoneNumber);
-    setProvider(providerPhoneNumber);
-  };
-
   const setDefaultPhoneNumber = async () => {
     try {
-      formatPhoneNumberAndChangeProvider(
-        phone[0] === '6' ? phone.replace('62', '0') : phone,
+      setPhoneNumber(
+        formatPhoneNumberAndChangeProvider(
+          phone[0] === '6' ? phone.replace('62', '0') : phone,
+        ).formattedPhoneNumber,
+      );
+      setProvider(
+        formatPhoneNumberAndChangeProvider(
+          phone[0] === '6' ? phone.replace('62', '0') : phone,
+        ).providerPhoneNumber,
       );
     } catch (e) {
       console.log(e);
@@ -175,7 +99,14 @@ const topUpPulsa = ({navigation, route}) => {
               phoneNumber[0] === '6'
                 ? phoneNumber.replace('62', '0')
                 : phoneNumber;
-            formatPhoneNumberAndChangeProvider(phoneNumber);
+            setPhoneNumber(
+              formatPhoneNumberAndChangeProvider(phoneNumber)
+                .formattedPhoneNumber,
+            );
+            setProvider(
+              formatPhoneNumberAndChangeProvider(phoneNumber)
+                .providerPhoneNumber,
+            );
           })
           .catch((e) => {
             console.log(e);
@@ -191,7 +122,13 @@ const topUpPulsa = ({navigation, route}) => {
             phoneNumber[0] === '6'
               ? phoneNumber.replace('62', '0')
               : phoneNumber;
-          formatPhoneNumberAndChangeProvider(phoneNumber);
+          setPhoneNumber(
+            formatPhoneNumberAndChangeProvider(phoneNumber)
+              .formattedPhoneNumber,
+          );
+          setProvider(
+            formatPhoneNumberAndChangeProvider(phoneNumber).providerPhoneNumber,
+          );
         })
         .catch((e) => {
           console.log(e);
@@ -259,13 +196,22 @@ const topUpPulsa = ({navigation, route}) => {
           flexTextInput={4}
           keyboardType="numeric"
           value={phoneNumber}
-          onSubmitEditing={(event) =>
-            formatPhoneNumberAndChangeProvider(
-              event.nativeEvent.text[0] === '6'
-                ? event.nativeEvent.text.replace('62', '0')
-                : event.nativeEvent.text,
-            )
-          }
+          onSubmitEditing={(event) => {
+            setPhoneNumber(
+              formatPhoneNumberAndChangeProvider(
+                event.nativeEvent.text[0] === '6'
+                  ? event.nativeEvent.text.replace('62', '0')
+                  : event.nativeEvent.text,
+              ).formattedPhoneNumber,
+            );
+            setProvider(
+              formatPhoneNumberAndChangeProvider(
+                event.nativeEvent.text[0] === '6'
+                  ? event.nativeEvent.text.replace('62', '0')
+                  : event.nativeEvent.text,
+              ).providerPhoneNumber,
+            );
+          }}
           onChangeText={(number) => setPhoneNumber(number)}
           childrenComponent={
             <View>

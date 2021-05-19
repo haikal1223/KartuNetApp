@@ -469,14 +469,6 @@ const flexStyles = {
     flexDirection: 'row-reverse',
   },
 
-  flexDirectionRow: {
-    flexDirection: 'row',
-  },
-
-  flexDirectionColumn: {
-    flexDirection: 'column',
-  },
-
   flexWrap: {
     flexWrap: 'wrap',
   },
@@ -1437,8 +1429,8 @@ const TSwipeableStyle = {
   },
   mainContainer: {
     // backgroundColor: 'orange',
-    flex: 1,
     height: Dimensions.get('window').height - 125,
+    flex: 1,
   },
   mainHeaderContainer: {
     marginVertical: 10,
@@ -1472,6 +1464,9 @@ const TSwipeableStyle = {
   },
   whiteColor: {
     color: whiteColor,
+  },
+  itemSpacing: {
+    marginVertical: 5,
   },
 };
 
