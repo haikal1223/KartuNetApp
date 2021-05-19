@@ -1,22 +1,10 @@
 import React, {useState} from 'react';
-import {
-  Alert,
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Alert, FlatList, Text, View} from 'react-native';
 import {KButton, KInput, TSwipable} from 'src/components';
 import styles from 'src/assets/style/main';
 import {priceConverter} from 'src/helpers/function';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {MonserratBold} from 'src/assets/style/main/fontFamily';
-import {
-  grayColor2,
-  greenColor,
-  whiteColor,
-} from 'src/assets/style/main/colorList';
+import {grayColor2, greenColor} from 'src/assets/style/main/colorList';
 import PropTypes from 'prop-types';
 
 const sampleData = [20000, 50000, 100000, 200000];
@@ -41,7 +29,7 @@ const topUpListrikOptions = ({route}) => {
   console.log(route.params.name);
   return (
     <>
-      <View style={styles.mainContainer}>
+      <View style={styles.flex1}>
         <KInput
           containerStyle={styles.marginHorizontalContainer}
           textInputStyleContainer={styles.textInputWithAllBorder}
@@ -54,7 +42,7 @@ const topUpListrikOptions = ({route}) => {
           keyExtractor={(item, index) => index}
           data={sampleData}
           numColumns={2}
-          contentContainerStyle={gaya.contentContainerStyle}
+          contentContainerStyle={styles.contentContainerStyle}
           renderItem={({item}) => (
             <TouchableOpacity
               onPress={() =>
@@ -66,11 +54,11 @@ const topUpListrikOptions = ({route}) => {
             >
               <View
                 style={{
-                  ...gaya.square,
+                  ...styles.square,
                   backgroundColor:
                     selectedOption === item ? greenColor : grayColor2,
                 }}>
-                <Text style={gaya.textStyle}>Rp.{priceConverter(item)}</Text>
+                <Text style={styles.textStyle}>Rp.{priceConverter(item)}</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -107,27 +95,6 @@ const topUpListrikOptions = ({route}) => {
     </>
   );
 };
-
-const gaya = StyleSheet.create({
-  contentContainerStyle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  square: {
-    alignItems: 'center',
-
-    borderRadius: 10,
-    height: 100,
-    justifyContent: 'center',
-    marginHorizontal: 4,
-    marginVertical: 10,
-    width: Dimensions.get('screen').width / 2 - 10,
-  },
-  textStyle: {
-    color: whiteColor,
-    fontFamily: MonserratBold,
-  },
-});
 
 topUpListrikOptions.propTypes = {
   navigation: PropTypes.object,

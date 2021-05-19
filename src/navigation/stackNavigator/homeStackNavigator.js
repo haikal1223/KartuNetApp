@@ -43,6 +43,7 @@ import BackArrowWhite from 'src/assets/image/svg/back-arrow-white-new.svg';
 // import IconMenuBurger from 'src/assets/image/svg/menu_burger.svg';
 import IconMenuBurgerBlack from 'src/assets/image/svg/menu_burger_black.svg';
 import topUpListrikOptions from 'src/screens/topupku/topUpListrikOptions';
+import topUpOptions from 'src/screens/topupku/topUpOptions';
 
 const Stack = createStackNavigator();
 
@@ -208,6 +209,32 @@ const HomeStackNavigator = ({navigation}) => {
           // eslint-disable-next-line react/display-name
           headerBackImage: () => <BackArrowWhite />,
         }}
+      />
+
+      <Stack.Screen
+        name="topUpOptions"
+        component={topUpOptions}
+        options={({route}) => ({
+          title: String.prototype.toUpperCase.call({
+            toString: () => {
+              return route.params.title;
+            },
+          }),
+          headerStyle: {
+            ...styles.headerMain,
+          },
+          headerLeftContainerStyle: {
+            ...styles.headerLeftStyle,
+          },
+          headerTitleAlign: 'center',
+          // headerTintColor: '#FFFFFF',
+          headerTitleStyle: {
+            ...styles.headerCenterStyle,
+            ...styles.blackColor,
+          },
+          // eslint-disable-next-line react/display-name
+          headerBackImage: () => <BackArrow />,
+        })}
       />
 
       <Stack.Screen

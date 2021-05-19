@@ -169,6 +169,7 @@ const BottomTabNavigator = () => {
       'Cicilan',
       'AirPam',
       'ListrikOptions',
+      'topUpOptions',
     ];
     if (topUpKuScreen.includes(routeName)) {
       return false;

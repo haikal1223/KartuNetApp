@@ -17,7 +17,6 @@ import styles from 'src/assets/style/main/index';
 import TelkomselIcon from 'src/assets/image/svg/provider/telkomsel.svg';
 import ICContact from 'src/assets/image/svg/ic_contact.svg';
 import {KInput, TSwipable} from 'src/components/';
-import {TInputPulsa} from 'src/components';
 import {
   formatPhoneNumberAndChangeProvider,
   // openContactPhone,
@@ -35,7 +34,7 @@ import {
 const topUpPulsa = ({navigation, route}) => {
   console.log(navigation);
   console.log(route.name);
-  const [contactList, setContactList] = useState(null);
+  // const [contactList, setContactList] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState(null);
   const [isPanelActive, setIsPanelActive] = useState(false);

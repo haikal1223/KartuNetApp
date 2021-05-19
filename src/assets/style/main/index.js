@@ -1500,6 +1500,27 @@ const topUpPaketDataStyles = {
   },
 };
 
+const topUpListrikOptionsStyle = {
+  contentContainerStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  square: {
+    alignItems: 'center',
+
+    borderRadius: 10,
+    height: 100,
+    justifyContent: 'center',
+    marginHorizontal: 4,
+    marginVertical: 10,
+    width: Dimensions.get('screen').width / 2 - 10,
+  },
+  textStyle: {
+    color: whiteColor,
+    fontFamily: MonserratBold,
+  },
+};
+
 const styles = StyleSheet.create({
   // Dummy slider style]
 
@@ -1654,6 +1675,9 @@ const styles = StyleSheet.create({
 
   // TopUpPaketData Screen Styles
   ...topUpPaketDataStyles,
+
+  // TopUpListrikOptions Screen Styles
+  ...topUpListrikOptionsStyle,
 });
 
 export default styles;
