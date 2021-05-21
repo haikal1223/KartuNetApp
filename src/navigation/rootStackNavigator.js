@@ -525,11 +525,11 @@ const RootStackNavigator = () => {
       // drawerPosition="right"
       // drawerContent={(props) => <DrawerContent {...props} />}
     >
-      {/* <Drawer.Screen
+      <Drawer.Screen
         options={{swipeEnabled: false}}
         name="Welcome"
         component={WelcomeStackNavigator}
-      /> */}
+      />
       <Drawer.Screen
         options={{swipeEnabled: false}}
         name="Home"

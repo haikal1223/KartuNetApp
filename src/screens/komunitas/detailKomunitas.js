@@ -79,7 +79,7 @@ const detailKomunitasScreen = ({route, navigation}) => {
         `${BASE_URL}/api/community/anggota?komunitas_id=${idCommunity}`,
         options,
       );
-      const count = communityMemberList.data.anggota.length;
+      const count = communityMemberList.data.total_data;
       setCountMember(count);
       setLoadingCount(false);
     } catch (e) {
@@ -240,7 +240,7 @@ const detailKomunitasScreen = ({route, navigation}) => {
           title="Gabung"
           buttonStyle={styles.containerSectionDetailKomunitasJoinButton}
           textStyle={{
-            ...styles.whiteColor,
+            ...styles.blackColor,
             ...styles.subHeaderText2,
           }}
           onPress={() => {}}
