@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {KImageMenu} from 'src/components';
 import {FlatList} from 'react-native';
-import TSwipable from '../../components/topUpKuComponents/TSwipable';
 
 // Style
 import styles from 'src/assets/style/main/index';
@@ -113,11 +112,7 @@ const topUpKuScreen = ({navigation}) => {
     />
   );
 
-  return (
-    <View style={styles.topUpKuContainer}>
-      <RenderFlatList />
-    </View>
-  );
+  return <View style={styles.topUpKuContainer}>{<RenderFlatList />}</View>;
 };
 
 topUpKuScreen.propTypes = {

@@ -1,5 +1,5 @@
 import TInputPulsa from './TInputPulsa';
-import TCardMenu from './TCardMenu';
-import TSwipable from './TSwipable';
+import TCardMenu from './TCardMenu'
 
-export {TInputPulsa, TCardMenu, TSwipable};
+
+export {TInputPulsa, TCardMenu}
