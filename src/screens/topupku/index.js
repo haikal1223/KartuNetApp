@@ -1,8 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {KImageMenu} from 'src/components';
-import {FlatList} from 'react-native';
 
 // Style
 import styles from 'src/assets/style/main/index';
@@ -67,52 +66,31 @@ const topUpKuScreen = ({navigation}) => {
     },
   ];
 
-  // const RenderListMenu = () => {
-  //   return listMenu.map((menuItem) => {
-  //     return (
-  //       <KImageMenu
-  //         key={menuItem.title}
-  //         containerMenuStyle={{
-  //           ...styles.containerMenuStyle,
-  //           ...styles.marginHorizontalMenu_9px,
-  //         }}
-  //         onPress={menuItem.onPress}
-  //         containerViewStyle={{
-  //           ...styles.containerMenuViewStyle,
-  //           justifyContent: 'center',
-  //         }}
-  //         imageStyle={styles.imageMenuStyle}
-  //         imageSource={menuItem.image}
-  //         textStyle={styles.topUpKuMenuStyle}
-  //         titleMenu={menuItem.title}
-  //       />
-  //     );
-  //   });
-  // };
-
-  const RenderFlatList = () => (
-    <FlatList
-      numColumns={4}
-      data={listMenu}
-      renderItem={({item}) => (
+  const RenderListMenu = () => {
+    return listMenu.map((menuItem) => {
+      return (
         <KImageMenu
-          key={item.title}
+          key={menuItem.title}
           containerMenuStyle={{
             ...styles.containerMenuStyle,
             ...styles.marginHorizontalMenu_9px,
           }}
-          onPress={item.onPress}
+          onPress={menuItem.onPress}
           containerViewStyle={styles.containerMenuViewStyle}
           imageStyle={styles.imageMenuStyle}
-          imageSource={item.image}
+          imageSource={menuItem.image}
           textStyle={styles.topUpKuMenuStyle}
-          titleMenu={item.title}
+          titleMenu={menuItem.title}
         />
-      )}
-    />
-  );
+      );
+    });
+  };
 
-  return <View style={styles.topUpKuContainer}>{<RenderFlatList />}</View>;
+  return (
+    <View style={styles.topUpKuContainer}>
+      <RenderListMenu />
+    </View>
+  );
 };
 
 topUpKuScreen.propTypes = {
