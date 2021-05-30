@@ -9,121 +9,51 @@ import {
   Platform,
 } from 'react-native';
 import ContactsWrapper from 'react-native-s-contact';
+import PropTypes from 'prop-types';
 // import ContactsWrapper from 'react-native-contacts-wrapper';
 
 // Style
 import styles from 'src/assets/style/main/index';
 import TelkomselIcon from 'src/assets/image/svg/provider/telkomsel.svg';
 import ICContact from 'src/assets/image/svg/ic_contact.svg';
-import {KInput} from 'src/components/';
-import {TInputPulsa} from 'src/components';
+import {KInput, TSwipable} from 'src/components/';
+import {
+  formatPhoneNumberAndChangeProvider,
+  // openContactPhone,
+  priceConverter,
+} from 'src/helpers/function';
+// import {
+//   telkomselPhoneNumberCode,
+//   smartfrenPhoneNumberCode,
+//   indosatPhoneNumberCode,
+//   xlPhoneNumberCode,
+//   axisPhoneNumberCode,
+//   threePhoneNumberCode,
+// } from 'src/helpers/function';
 
-const topUpPulsa = ({navigation}) => {
-  const [contactList, setContactList] = useState(null);
+const topUpPulsa = ({navigation, route}) => {
+  console.log(navigation);
+  console.log(route.name);
+  // const [contactList, setContactList] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [provider, setProvider] = useState(null);
-
-  const telkomselPhoneNumberCode = [
-    '0811',
-    '0812',
-    '0813',
-    '0821',
-    '0822',
-    '0852',
-    '0853',
-    '0823',
-    '0851',
-  ];
-
-  const indosatPhoneNumberCode = [
-    '0814',
-    '0815',
-    '0816',
-    '0855',
-    '0856',
-    '0857',
-    '0858',
-  ];
-
-  const xlPhoneNumberCode = ['0817', '0818', '0819', '0859', '0877', '0878'];
-
-  const axisPhoneNumberCode = ['0838', '0831', '0832', '0833'];
-
-  const threePhoneNumberCode = ['0895', '0896', '0897', '0898', '0899'];
-
-  const smartfrenPhoneNumberCode = [
-    '0881',
-    '0882',
-    '0883',
-    '0884',
-    '0885',
-    '0886',
-    '0887',
-    '0888',
-    '0889',
-  ];
+  const [isPanelActive, setIsPanelActive] = useState(false);
+  const [selectedPrice, setSelectedPrice] = useState(0);
 
   const user = useSelector((state) => state.auth.user);
   const {phone} = user;
 
-  const formatPhoneNumberAndChangeProvider = (phoneNumber) => {
-    const formattedPhoneNumber =
-      phoneNumber[0] === '6' ? phoneNumber.replace('62', '0') : phoneNumber;
-    let providerPhoneNumber = '';
-    const telkomselFindIndex = telkomselPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const indosatFindIndex = indosatPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const xlFindIndex = xlPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const axisFindIndex = axisPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const threeFindIndex = threePhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    const smartfrenFindIndex = smartfrenPhoneNumberCode.findIndex(
-      (codeNumber) => codeNumber === formattedPhoneNumber.substr(0, 4),
-    );
-
-    if (telkomselFindIndex !== -1) {
-      providerPhoneNumber = 'Telkomsel';
-    }
-
-    if (indosatFindIndex !== -1) {
-      providerPhoneNumber = 'Indosat';
-    }
-
-    if (xlFindIndex !== -1) {
-      providerPhoneNumber = 'XL';
-    }
-
-    if (axisFindIndex !== -1) {
-      providerPhoneNumber = 'Axis';
-    }
-    if (threeFindIndex !== -1) {
-      providerPhoneNumber = 'Three';
-    }
-    if (smartfrenFindIndex !== -1) {
-      providerPhoneNumber = 'Smartfren';
-    }
-
-    setPhoneNumber(formattedPhoneNumber);
-    setProvider(providerPhoneNumber);
-  };
-
   const setDefaultPhoneNumber = async () => {
     try {
-      formatPhoneNumberAndChangeProvider(
-        phone[0] === '6' ? phone.replace('62', '0') : phone,
+      setPhoneNumber(
+        formatPhoneNumberAndChangeProvider(
+          phone[0] === '6' ? phone.replace('62', '0') : phone,
+        ).formattedPhoneNumber,
+      );
+      setProvider(
+        formatPhoneNumberAndChangeProvider(
+          phone[0] === '6' ? phone.replace('62', '0') : phone,
+        ).providerPhoneNumber,
       );
     } catch (e) {
       console.log(e);
@@ -139,19 +69,19 @@ const topUpPulsa = ({navigation}) => {
   const listMenu = [
     {
       label: '15K',
-      price: '15.356',
+      price: 15356,
     },
     {
       label: '20K',
-      price: '20.700',
+      price: 20700,
     },
     {
       label: '25K',
-      price: '26.008',
+      price: 26.008,
     },
     {
       label: '30K',
-      price: '30.663',
+      price: 30663,
     },
   ];
 
@@ -169,7 +99,14 @@ const topUpPulsa = ({navigation}) => {
               phoneNumber[0] === '6'
                 ? phoneNumber.replace('62', '0')
                 : phoneNumber;
-            formatPhoneNumberAndChangeProvider(phoneNumber);
+            setPhoneNumber(
+              formatPhoneNumberAndChangeProvider(phoneNumber)
+                .formattedPhoneNumber,
+            );
+            setProvider(
+              formatPhoneNumberAndChangeProvider(phoneNumber)
+                .providerPhoneNumber,
+            );
           })
           .catch((e) => {
             console.log(e);
@@ -185,7 +122,13 @@ const topUpPulsa = ({navigation}) => {
             phoneNumber[0] === '6'
               ? phoneNumber.replace('62', '0')
               : phoneNumber;
-          formatPhoneNumberAndChangeProvider(phoneNumber);
+          setPhoneNumber(
+            formatPhoneNumberAndChangeProvider(phoneNumber)
+              .formattedPhoneNumber,
+          );
+          setProvider(
+            formatPhoneNumberAndChangeProvider(phoneNumber).providerPhoneNumber,
+          );
         })
         .catch((e) => {
           console.log(e);
@@ -193,79 +136,117 @@ const topUpPulsa = ({navigation}) => {
     }
   };
 
+  const onPressPriceItem = (price) => {
+    setIsPanelActive(true);
+    setSelectedPrice(price);
+  };
+
+  const onCancelPriceItem = () => {
+    setIsPanelActive(false);
+    setSelectedPrice(0);
+  };
+
   const RenderListMenu = () => {
     return listMenu.map((item) => {
       return (
-        <TouchableOpacity style={styles.pulsaMenuBoxContainer} key={item.label}>
+        <TouchableOpacity
+          style={styles.pulsaMenuBoxContainer}
+          key={item.label}
+          onPress={() => onPressPriceItem(item.price)}>
           <Text style={styles.pulsaMenuText}>{item.label}</Text>
-          <Text style={styles.pulsaPriceText}>Rp{item.price}</Text>
+          <Text style={styles.pulsaPriceText}>
+            Rp{priceConverter(item.price)}
+          </Text>
         </TouchableOpacity>
       );
     });
   };
 
-  const getContact = () => {
-    Contacts.checkPermission((error, res) => {
-      if (res === 'authorized') {
-        Contacts.getAll((err, contact) => {
-          {
-            console.log(contact);
-          }
-          setContactList(contact);
-        });
-      }
-    });
-  };
+  // const getContact = () => {
+  //   Contacts.checkPermission((error, res) => {
+  //     if (res === 'authorized') {
+  //       Contacts.getAll((err, contact) => {
+  //         {
+  //           console.log(contact);
+  //         }
+  //         setContactList(contact);
+  //       });
+  //     }
+  //   });
+  // };
 
   return (
-    <ScrollView style={styles.topUpKuSubContainer}>
-      <KInput
-        leftComponent={
-          <View style={styles.marginRight2}>
-            <View style={styles.flexDirectionRow}>
-              <TouchableOpacity onPress={() => openContactPhone()}>
-                <ICContact />
-              </TouchableOpacity>
-            </View>
-          </View>
-        }
-        labelTextInput=""
-        labelStyle={styles.labelTextInputStyle}
-        textInputStyleContainer={styles.TInputContainerNew}
-        textInputStyle={{...styles.textInputStyle, ...styles.lightGrayColor2}}
-        placeholder="Masukkan Nomor Telepon"
-        flexTextInput={4}
-        keyboardType="numeric"
-        value={phoneNumber}
-        onSubmitEditing={(event) =>
-          formatPhoneNumberAndChangeProvider(
-            event.nativeEvent.text[0] === '6'
-              ? event.nativeEvent.text.replace('62', '0')
-              : event.nativeEvent.text,
-          )
-        }
-        onChangeText={(number) => setPhoneNumber(number)}
-        childrenComponent={
-          <View>
-            <View style={styles.flexDirectionRow}>
-              <View>
-                {provider === 'Telkomsel' ? (
-                  <TelkomselIcon />
-                ) : (
-                  <Text>{provider}</Text>
-                )}
+    <>
+      <ScrollView style={styles.topUpKuSubContainer}>
+        <KInput
+          leftComponent={
+            <View style={styles.marginRight2}>
+              <View style={styles.flexDirectionRow}>
+                <TouchableOpacity onPress={() => openContactPhone()}>
+                  <ICContact />
+                </TouchableOpacity>
               </View>
             </View>
-          </View>
-        }
-      />
+          }
+          labelTextInput=""
+          labelStyle={styles.labelTextInputStyle}
+          textInputStyleContainer={styles.TInputContainerNew}
+          textInputStyle={{...styles.textInputStyle, ...styles.lightGrayColor2}}
+          placeholder="Masukkan Nomor Telepon"
+          flexTextInput={4}
+          keyboardType="numeric"
+          value={phoneNumber}
+          onSubmitEditing={(event) => {
+            setPhoneNumber(
+              formatPhoneNumberAndChangeProvider(
+                event.nativeEvent.text[0] === '6'
+                  ? event.nativeEvent.text.replace('62', '0')
+                  : event.nativeEvent.text,
+              ).formattedPhoneNumber,
+            );
+            setProvider(
+              formatPhoneNumberAndChangeProvider(
+                event.nativeEvent.text[0] === '6'
+                  ? event.nativeEvent.text.replace('62', '0')
+                  : event.nativeEvent.text,
+              ).providerPhoneNumber,
+            );
+          }}
+          onChangeText={(number) => setPhoneNumber(number)}
+          childrenComponent={
+            <View>
+              <View style={styles.flexDirectionRow}>
+                <View>
+                  {provider === 'Telkomsel' ? (
+                    <TelkomselIcon />
+                  ) : (
+                    <Text>{provider}</Text>
+                  )}
+                </View>
+              </View>
+            </View>
+          }
+        />
 
-      <View style={styles.pulsaButtonContainer}>
-        <RenderListMenu />
-      </View>
-      {console.log(`Contact List: ${getContact}`)}
-    </ScrollView>
+        <View style={styles.pulsaButtonContainer}>
+          <RenderListMenu />
+        </View>
+        {/* {console.log(`Contact List: ${getContact}`)} */}
+      </ScrollView>
+      <TSwipable
+        isPanelActive={isPanelActive}
+        closePanel={onCancelPriceItem}
+        provider={provider}
+        data={{selectedPrice}}
+        screenName={route.name}
+      />
+    </>
   );
+};
+
+topUpPulsa.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default topUpPulsa;

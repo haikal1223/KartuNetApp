@@ -7,11 +7,15 @@ import App from './src/App';
 import {name as appName} from './app.json';
 
 import {Provider} from 'react-redux';
-import {createStore, applyMiddleware} from 'redux';
-import thunk from 'redux-thunk';
+// import {createStore, applyMiddleware} from 'redux';
+// import thunk from 'redux-thunk';
 import reducers from './src/helpers/redux/reducers';
+import {configureStore} from '@reduxjs/toolkit';
 
-const store = createStore(reducers, {}, applyMiddleware(thunk));
+const store = configureStore({
+  reducer: reducers,
+  devTools: true,
+});
 
 const Root = () => (
   <Provider store={store}>

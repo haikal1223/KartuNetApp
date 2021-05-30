@@ -40,8 +40,10 @@ import promoScreen from 'src/screens/promo';
 import styles from 'src/assets/style/main';
 import BackArrow from 'src/assets/image/svg/back-arrow.svg';
 import BackArrowWhite from 'src/assets/image/svg/back-arrow-white-new.svg';
-import IconMenuBurger from 'src/assets/image/svg/menu_burger.svg';
+// import IconMenuBurger from 'src/assets/image/svg/menu_burger.svg';
 import IconMenuBurgerBlack from 'src/assets/image/svg/menu_burger_black.svg';
+import topUpListrikOptions from 'src/screens/topupku/topUpListrikOptions';
+import topUpOptions from 'src/screens/topupku/topUpOptions';
 
 const Stack = createStackNavigator();
 
@@ -82,7 +84,8 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpKuScreen}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            // ...styles.headerMain,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -92,10 +95,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
@@ -104,7 +107,7 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpPulsa}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -114,10 +117,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
@@ -126,7 +129,7 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpPaketData}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -136,10 +139,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
@@ -148,20 +151,41 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpListrik}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
           },
           headerTitleAlign: 'center',
-          title: 'Listrik',
+          title: 'PLN',
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
+        }}
+      />
+      <Stack.Screen
+        name="ListrikOptions"
+        component={topUpListrikOptions}
+        options={{
+          headerStyle: {
+            ...styles.headerMain,
+          },
+          headerLeftContainerStyle: {
+            ...styles.headerLeftStyle,
+          },
+          headerTitleAlign: 'center',
+          title: 'PLN',
+          // headerTintColor: '#FFFFFF',
+          headerTitleStyle: {
+            ...styles.headerCenterStyle,
+            ...styles.blackColor,
+          },
+          // eslint-disable-next-line react/display-name
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
@@ -188,11 +212,37 @@ const HomeStackNavigator = ({navigation}) => {
       />
 
       <Stack.Screen
+        name="TopUpOptions"
+        component={topUpOptions}
+        options={({route}) => ({
+          title: String.prototype.toUpperCase.call({
+            toString: () => {
+              return route.params.title;
+            },
+          }),
+          headerStyle: {
+            ...styles.headerMain,
+          },
+          headerLeftContainerStyle: {
+            ...styles.headerLeftStyle,
+          },
+          headerTitleAlign: 'center',
+          // headerTintColor: '#FFFFFF',
+          headerTitleStyle: {
+            ...styles.headerCenterStyle,
+            ...styles.blackColor,
+          },
+          // eslint-disable-next-line react/display-name
+          headerBackImage: () => <BackArrow />,
+        })}
+      />
+
+      <Stack.Screen
         name="Indihome"
         component={topUpIndihome}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -202,10 +252,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
@@ -214,7 +264,7 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpCicilan}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -224,10 +274,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
@@ -236,7 +286,7 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpPam}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -246,10 +296,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 

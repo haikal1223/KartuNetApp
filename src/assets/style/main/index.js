@@ -468,13 +468,8 @@ const flexStyles = {
     flex: 1,
     flexDirection: 'row-reverse',
   },
-
-  flexDirectionRow: {
-    flexDirection: 'row',
-  },
-
-  flexDirectionColumn: {
-    flexDirection: 'column',
+  flexEnd: {
+    justifyContent: 'flex-end',
   },
 
   flexWrap: {
@@ -605,6 +600,9 @@ const buttonStyles = {
 const textInputStyle = {
   containerStyle: {
     marginBottom: height * 0.04,
+  },
+  marginHorizontalContainer: {
+    marginHorizontal: 10,
   },
   labelTextInputStyle: {
     fontFamily: MonserratBold,
@@ -1423,6 +1421,109 @@ const topUpKuStyles = {
   },
 };
 
+const TSwipeableStyle = {
+  descContainer: {
+    flexDirection: 'row',
+    marginVertical: 5,
+  },
+  dividerStyle: {
+    marginVertical: 5,
+    paddingVertical: 10,
+  },
+  mainContainer: {
+    // backgroundColor: 'orange',
+    height: Dimensions.get('window').height - 125,
+    flex: 1,
+  },
+  mainHeaderContainer: {
+    marginVertical: 10,
+  },
+  marginHorizontal: {
+    marginHorizontal: 10,
+  },
+  providerText: {
+    marginRight: 12.5,
+  },
+  purchaseButtonContainer: {
+    bottom: 0,
+    position: 'absolute',
+    width: '100%',
+  },
+  secondaryHeaderContainer: {
+    marginHorizontal: 10,
+    marginVertical: 7.5,
+  },
+  spaceBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  subHeaderText2: {
+    fontFamily: MonserratBold,
+    fontSize: width * 0.035,
+  },
+  textBold: {
+    fontWeight: '700',
+    fontFamily: MonserratBold,
+  },
+  whiteColor: {
+    color: whiteColor,
+  },
+  itemSpacing: {
+    marginVertical: 5,
+  },
+};
+
+const topUpPaketDataStyles = {
+  descContainer: {
+    // flexWrap: 'wrap',
+    marginVertical: 2,
+    width: '100%',
+  },
+  icon: {
+    backgroundColor: '#eeeeee',
+    borderRadius: 10,
+    height: 45,
+    marginRight: 15,
+    width: 45,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    marginVertical: 10,
+    // alignItems: 'center',
+  },
+  packageName: {
+    // fontWeight: 'bold',
+    fontFamily: MonserratBold,
+    fontSize: 16,
+    marginBottom: 5,
+  },
+  priceContainer: {
+    flexDirection: 'row',
+  },
+};
+
+const topUpListrikOptionsStyle = {
+  contentContainerStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  square: {
+    alignItems: 'center',
+
+    borderRadius: 10,
+    height: 100,
+    justifyContent: 'center',
+    marginHorizontal: 4,
+    marginVertical: 10,
+    width: Dimensions.get('screen').width / 2 - 10,
+  },
+  textStyle: {
+    color: whiteColor,
+    fontFamily: MonserratBold,
+  },
+};
+
 const styles = StyleSheet.create({
   // Dummy slider style]
 
@@ -1571,6 +1672,15 @@ const styles = StyleSheet.create({
 
   // TopUpku Screen Styles
   ...topUpKuStyles,
+
+  // TSwipeable Screen Styles
+  ...TSwipeableStyle,
+
+  // TopUpPaketData Screen Styles
+  ...topUpPaketDataStyles,
+
+  // TopUpListrikOptions Screen Styles
+  ...topUpListrikOptionsStyle,
 });
 
 export default styles;

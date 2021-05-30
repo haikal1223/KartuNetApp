@@ -154,9 +154,38 @@ const WelcomeStackNavigator = () => {
 };
 
 const BottomTabNavigator = () => {
+  const getTabBarVisibility = (route) => {
+    const routeName = route.state
+      ? route.state.routes[route.state.index].name
+      : '';
+    console.log(routeName);
+    const topUpKuScreen = [
+      'TopUpKu',
+      'Pulsa',
+      'PaketData',
+      'Listrik',
+      'BPJS',
+      'Indihome',
+      'Cicilan',
+      'AirPam',
+      'ListrikOptions',
+      'TopUpOptions',
+    ];
+    if (topUpKuScreen.includes(routeName)) {
+      return false;
+    }
+
+    return true;
+  };
   return (
     <Tab.Navigator tabBar={(props) => <KTabBar {...props} />}>
-      <Tab.Screen name="Home" component={HomeStackNavigator} />
+      <Tab.Screen
+        name="Home"
+        component={HomeStackNavigator}
+        options={({route}) => ({
+          tabBarVisible: getTabBarVisibility(route),
+        })}
+      />
       <Tab.Screen name="Transaksi" component={TransaksiStackNavigator} />
       {/* <Tab.Screen
         options={{
@@ -491,15 +520,16 @@ const RootStackNavigator = () => {
       screenOptions={() => ({
         headerShown: false,
       })}
-      initialRouteName="Welcome"
-      backBehavior="history"
-      drawerPosition="right"
-      drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen
+      // initialRouteName="Welcome"
+      // backBehavior="history"
+      // drawerPosition="right"
+      // drawerContent={(props) => <DrawerContent {...props} />}
+    >
+      {/* <Drawer.Screen
         options={{swipeEnabled: false}}
         name="Welcome"
         component={WelcomeStackNavigator}
-      />
+      /> */}
       <Drawer.Screen
         options={{swipeEnabled: false}}
         name="Home"

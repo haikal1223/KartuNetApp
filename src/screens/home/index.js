@@ -79,19 +79,30 @@ const homeScreen = ({route, navigation}) => {
       disabled: false,
     },
     {
-      image: TopUpDisabledIcon,
+      image: TopUpIcon,
       title: 'TopUpKu',
-      // onPress: () => {{
-      //   navigation.navigate('TopUpKu');
-      // }},
-      onPress: () => {},
+      onPress: () => {
+        {
+          navigation.navigate('TopUpKu');
+        }
+      },
       disabled: true,
     },
+    // {
+    //   image: TopUpDisabledIcon,
+    //   title: 'TopUpKu',
+    //   // onPress: () => {
+    //   //   {
+    //   //     navigation.navigate('TopUpKu');
+    //   //   }
+    //   // },
+    //   disabled: true,
+    // },
     {
       image: TokokuDisabledIcon,
       title: 'Tokoku',
       onPress: () => {},
-      disabled: true,
+      disabled: false,
     },
     {
       image: MarketplaceDisabledIcon,
