@@ -212,7 +212,7 @@ const HomeStackNavigator = ({navigation}) => {
       />
 
       <Stack.Screen
-        name="topUpOptions"
+        name="TopUpOptions"
         component={topUpOptions}
         options={({route}) => ({
           title: String.prototype.toUpperCase.call({
@@ -264,7 +264,7 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpCicilan}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -274,10 +274,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 
@@ -286,7 +286,7 @@ const HomeStackNavigator = ({navigation}) => {
         component={topUpPam}
         options={{
           headerStyle: {
-            ...styles.headerPurple,
+            ...styles.headerMain,
           },
           headerLeftContainerStyle: {
             ...styles.headerLeftStyle,
@@ -296,10 +296,10 @@ const HomeStackNavigator = ({navigation}) => {
           // headerTintColor: '#FFFFFF',
           headerTitleStyle: {
             ...styles.headerCenterStyle,
-            ...styles.whiteColor,
+            ...styles.blackColor,
           },
           // eslint-disable-next-line react/display-name
-          headerBackImage: () => <BackArrowWhite />,
+          headerBackImage: () => <BackArrow />,
         }}
       />
 

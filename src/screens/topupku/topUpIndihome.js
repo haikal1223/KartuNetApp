@@ -33,7 +33,10 @@ const topUpIndihome = ({navigation}) => {
         renderItem={({item}) => (
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('topUpOptions', {title: item.name})
+              navigation.navigate('TopUpOptions', {
+                title: item.name,
+                type: 'InternetAndCable',
+              })
             }>
             <TCardMenu key={item.name} image={item.image} name={item.name} />
           </TouchableOpacity>

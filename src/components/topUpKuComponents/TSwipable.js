@@ -183,7 +183,7 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
           <View style={styles.mainContainer}>
             <View style={styles.marginHorizontal}>
               <View style={styles.mainHeaderContainer}>
-                <Text style={{...styles.textBold, ...styles.fontMonserratBold}}>
+                <Text style={styles.fontMonserratBold}>
                   Ringkasan Pembelian
                 </Text>
               </View>
@@ -206,7 +206,9 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
             </View>
             <View style={styles.marginHorizontal}>
               <View style={styles.mainHeaderContainer}>
-                <Text style={styles.textBold}>Ringkasan Pembayaran</Text>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembayaran
+                </Text>
               </View>
               <View>
                 <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
@@ -244,10 +246,263 @@ const TSwipable = ({isPanelActive, closePanel, provider, data, screenName}) => {
         </React.Fragment>
       );
     },
+    InternetAndCable: () => {
+      return (
+        <React.Fragment>
+          <View style={styles.mainContainer}>
+            <View style={styles.marginHorizontal}>
+              <View style={styles.mainHeaderContainer}>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembelian
+                </Text>
+              </View>
+              <View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Nama</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    {data.custName}
+                  </Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Customer ID</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    {data.customerID}
+                  </Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Bill Period</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Area Code</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>NPWP</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.marginHorizontal}>
+              <View style={styles.mainHeaderContainer}>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembayaran
+                </Text>
+              </View>
+              <View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Bill Amount</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Admin Fee</Text>
+                  <Text style={styles.fontMonserratRegular}>Rp.3.000</Text>
+                </View>
+                {/* <Text>Rp{priceConverter(data.selectedPrice)}</Text> */}
+              </View>
+              <Divider style={styles.itemSpacing} />
+              <View style={styles.mainHeaderContainer}>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratBold}>Total Pembayaran</Text>
+                  <Text>TBA</Text>
+                  {/* <Text>Rp{priceConverter(data.dataPackage + 1500)}</Text> */}
+                </View>
+              </View>
+              {/* <Text>{screenName}</Text> */}
+            </View>
+            <View style={styles.purchaseButtonContainer}>
+              <KButton
+                title="Bayar"
+                buttonStyle={styles.greenBottomButton}
+                textStyle={{
+                  ...styles.whiteColor,
+                  ...styles.subHeaderText2,
+                }}
+              />
+            </View>
+          </View>
+        </React.Fragment>
+      );
+    },
+    Cicilan: () => {
+      return (
+        <React.Fragment>
+          <View style={styles.mainContainer}>
+            <View style={styles.marginHorizontal}>
+              <View style={styles.mainHeaderContainer}>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembelian
+                </Text>
+              </View>
+              <View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Nama</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    {data.custName}
+                  </Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>ID Pelanggan</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    {data.customerID}
+                  </Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Jatuh Tempo</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Nomor Cicilan</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Nomor Polisi</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.marginHorizontal}>
+              <View style={styles.mainHeaderContainer}>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembayaran
+                </Text>
+              </View>
+              <View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>
+                    Jumlah Tagihan
+                  </Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Admin Fee</Text>
+                  <Text style={styles.fontMonserratRegular}>Rp.3.000</Text>
+                </View>
+                {/* <Text>Rp{priceConverter(data.selectedPrice)}</Text> */}
+              </View>
+              <Divider style={styles.itemSpacing} />
+              <View style={styles.mainHeaderContainer}>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratBold}>Total Pembayaran</Text>
+                  <Text>TBA</Text>
+                  {/* <Text>Rp{priceConverter(data.dataPackage + 1500)}</Text> */}
+                </View>
+              </View>
+              {/* <Text>{screenName}</Text> */}
+            </View>
+            <View style={styles.purchaseButtonContainer}>
+              <KButton
+                title="Bayar"
+                buttonStyle={styles.greenBottomButton}
+                textStyle={{
+                  ...styles.whiteColor,
+                  ...styles.subHeaderText2,
+                }}
+              />
+            </View>
+          </View>
+        </React.Fragment>
+      );
+    },
+    Pam: () => {
+      return (
+        <React.Fragment>
+          <View style={styles.mainContainer}>
+            <View style={styles.marginHorizontal}>
+              <View style={styles.mainHeaderContainer}>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembelian
+                </Text>
+              </View>
+              <View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>ID Pelanggan</Text>
+                  <Text style={styles.fontMonserratRegular}>
+                    {data.customerID}
+                  </Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Alamat</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>
+                    Periode Tagihan
+                  </Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>
+                    Meter Sebelumnya
+                  </Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Meter Kini</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Pemakaian</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>Denda</Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.marginHorizontal}>
+              <View style={styles.mainHeaderContainer}>
+                <Text style={styles.fontMonserratBold}>
+                  Ringkasan Pembayaran
+                </Text>
+              </View>
+              <View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>
+                    Jumlah Tagihan
+                  </Text>
+                  <Text style={styles.fontMonserratRegular}>TBA</Text>
+                </View>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratRegular}>
+                    Biaya Administrasi
+                  </Text>
+                  <Text style={styles.fontMonserratRegular}>Rp.3.000</Text>
+                </View>
+                {/* <Text>Rp{priceConverter(data.selectedPrice)}</Text> */}
+              </View>
+              <Divider style={styles.itemSpacing} />
+              <View style={styles.mainHeaderContainer}>
+                <View style={{...styles.spaceBetween, ...styles.itemSpacing}}>
+                  <Text style={styles.fontMonserratBold}>Total Pembayaran</Text>
+                  <Text>TBA</Text>
+                  {/* <Text>Rp{priceConverter(data.dataPackage + 1500)}</Text> */}
+                </View>
+              </View>
+              {/* <Text>{screenName}</Text> */}
+            </View>
+            <View style={styles.purchaseButtonContainer}>
+              <KButton
+                title="Bayar"
+                buttonStyle={styles.greenBottomButton}
+                textStyle={{
+                  ...styles.whiteColor,
+                  ...styles.subHeaderText2,
+                }}
+              />
+            </View>
+          </View>
+        </React.Fragment>
+      );
+    },
   };
   screens.Pulsa.displayName = 'Pulsa';
   screens.PaketData.displayName = 'PaketData';
   screens.ListrikOptions.displayName = 'ListrikOptions';
+  screens.InternetAndCable.displayName = 'InternetAndCable';
+  screens.Cicilan.displayName = 'Cicilan';
+  screens.Pam.displayName = 'Pam';
   console.log(screenName);
   return (
     <SwipeablePanel {...panelProps} isActive={isPanelActive}>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Alert,
   // Text,
   View,
 } from 'react-native';
@@ -23,28 +24,32 @@ const topUpOptions = ({route}) => {
     setIsPanelActive(false);
     setDataPackage({});
   };
+  console.log(route);
   return (
     <>
-      <View style={{...styles.flex1, backgroundColor: 'orange'}}>
-        <View>
-          <KInput
-            containerStyle={styles.marginHorizontalContainer}
-            textInputStyleContainer={styles.textInputWithAllBorder}
-            placeholder="Enter customer ID"
-            labelTextInput={''}
-            value={customerID}
-            onChangeText={(text) => setCustomerID(text)}
-          />
-        </View>
-        <View>
+      <View style={styles.flex1}>
+        <KInput
+          containerStyle={styles.marginHorizontalContainer}
+          textInputStyleContainer={styles.textInputWithAllBorder}
+          placeholder="Enter customer ID"
+          labelTextInput={''}
+          value={customerID}
+          onChangeText={(text) => setCustomerID(text)}
+        />
+        <View style={{...styles.flex1, ...styles.flexEnd}}>
           <KButton
             // disabled={!selectedOption}
             title="Bayar"
+            buttonStyle={styles.greenBottomButton}
             textStyle={{
               ...styles.whiteColor,
               ...styles.subHeaderText2,
             }}
-            buttonStyle={styles.greenBottomButton}
+            onPress={() => {
+              customerID
+                ? onPressDataItem()
+                : Alert.alert('Please Fill in your Customer ID');
+            }}
           />
         </View>
       </View>
@@ -52,7 +57,7 @@ const topUpOptions = ({route}) => {
         isPanelActive={isPanelActive}
         closePanel={onCancelDataItem}
         data={{dataPackage, customerID}}
-        screenName={route.name}
+        screenName={route.params.type}
       />
     </>
   );

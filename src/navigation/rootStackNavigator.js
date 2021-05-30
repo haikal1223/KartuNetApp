@@ -169,7 +169,7 @@ const BottomTabNavigator = () => {
       'Cicilan',
       'AirPam',
       'ListrikOptions',
-      'topUpOptions',
+      'TopUpOptions',
     ];
     if (topUpKuScreen.includes(routeName)) {
       return false;
@@ -525,11 +525,11 @@ const RootStackNavigator = () => {
       // drawerPosition="right"
       // drawerContent={(props) => <DrawerContent {...props} />}
     >
-      <Drawer.Screen
+      {/* <Drawer.Screen
         options={{swipeEnabled: false}}
         name="Welcome"
         component={WelcomeStackNavigator}
-      />
+      /> */}
       <Drawer.Screen
         options={{swipeEnabled: false}}
         name="Home"

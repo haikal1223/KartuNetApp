@@ -468,6 +468,9 @@ const flexStyles = {
     flex: 1,
     flexDirection: 'row-reverse',
   },
+  flexEnd: {
+    justifyContent: 'flex-end',
+  },
 
   flexWrap: {
     flexWrap: 'wrap',
